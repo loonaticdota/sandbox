@@ -1,0 +1,39 @@
+# Composer & Dependencies
+/vendor/
+composer.phar
+
+# Environment & Sensitive Configs
+.env
+.env.*
+!.env.example
+
+# Logs, Cache & Temporary Files
+*.log
+/logs/
+/temp/
+/tmp/
+/cache/
+error_log
+
+# OS Generated Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# IDE & Editor Specific Files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Testing & Coverage
+.phpunit.cache/
+.phpunit.result.cache
+

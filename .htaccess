@@ -1,0 +1,64 @@
+# ==============================================================================
+# 1. ENGINE & BASE SETTINGS
+# ==============================================================================
+RewriteEngine On
+# RewriteBase /
+
+# Prevent directory listings
+Options -Indexes
+
+# Follow symbolic links safely
+Options +FollowSymLinks
+
+# ==============================================================================
+# 2. SECURITY HEADERS & PROTECTIONS
+# ==============================================================================
+
+# Protect sensitive files (hidden files, env files, composer configs, etc.)
+<FilesMatch "^\.(?!well-known)">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "(composer\.json|composer\.lock|package\.json|package-lock\.json|\.env|Dockerfile|docker-compose\.yml)">
+    Require all denied
+</FilesMatch>
+
+# Prevent Clickjacking
+Header always set X-Frame-Options "SAMEORIGIN"
+
+# Prevent MIME-type sniffing
+Header always set X-Content-Type-Options "nosniff"
+
+# Enable Browser XSS Protection
+Header always set X-XSS-Protection "1; mode=block"
+
+# Referrer Policy
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# ==============================================================================
+# 3. FORCE HTTPS & WWW NORMALIZATION (OPTIONAL)
+# ==============================================================================
+# Uncomment the block below to force HTTPS in production
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ==============================================================================
+# 4. COMPRESSION (GZIP)
+# ==============================================================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/ecmascript
+    AddOutputFilterByType DEFLATE application/rss+xml application/xml
+    AddOutputFilterByType DEFLATE application/json application/ld+json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ==============================================================================
+# 6. ROUTING / FRONT CONTROLLER
+# ==============================================================================
+<IfModule mod_rewrite.c>
+    # If the requested file or directory doesn't exist, route to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
