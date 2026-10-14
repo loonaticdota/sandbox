@@ -11,6 +11,7 @@ class Router
         // =========================================================================
         'home'    => ['home/home.php', 'Home', 'home'],
         'example' => ['example/example.php', 'Example', 'index'],
+        'auth'    => ['auth/auth.php', 'Auth', 'index'],
 
         // =========================================================================
         // EXAMPLES FOR COMMON ROUTING SCENARIOS (Uncomment and adapt as needed)
